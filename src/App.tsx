@@ -1,24 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
+import Header from "./components/Header/Header";
+import { useLocation } from 'react-router-dom';
+
 import './App.css';
+import './iconMoonStyles.css';
+import Icon from "./components/Icon/Icon";
+import DefaultBtn from "./components/DefaultBtn/DefaultBtn";
+import AppRouter from "./AppRouter";
+import Popup from "./components/Popup/Popup";
+import TextInput from "./components/TextInput/TextInput";
 
 function App() {
+  console.log(useLocation());
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header
+        title='Мой список дел'
+        rightBtn={
+          <DefaultBtn
+            iconName='plus'
+            iconSize={18} />}
+      />
+
+      <Popup
+        title='Удалить список купить в магазине?'
+        children={
+          <TextInput
+            placeholder='Добавить'
+            placeholderIcon={{
+              size: 16,
+              icon: 'search',
+            }}
+            button={{
+              iconName: 'plus',
+              iconSize: 16,
+            }}
+            handleChange={(e) => console.log(e.target.value)}
+          />
+        }
+      />
+
+      <AppRouter />
     </div>
   );
 }

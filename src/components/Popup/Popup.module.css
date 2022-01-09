@@ -4,6 +4,8 @@
   position: fixed;
   top: 0;
   left: 0;
+  position: absolute;
+  z-index: 100;
 }
 
 .popupBG {
@@ -12,7 +14,6 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 100;
   background-color: rgba(255, 255, 255, 0.7);
 }
 
@@ -51,10 +52,4 @@
 .title {
   display: inline-block;
   max-width: 190px;
-}
-
-.childrenWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
 }

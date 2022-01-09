@@ -6,7 +6,7 @@ import styles from './DefaultBtn.module.css';
 interface IBtn {
   iconName: string;
   iconSize: number;
-  handleClick?: () => void;
+  handleClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const DefaultBtn: FC<IBtn> = ({

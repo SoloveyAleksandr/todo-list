@@ -8,9 +8,15 @@ import DefaultBtn from "./components/DefaultBtn/DefaultBtn";
 import AppRouter from "./AppRouter";
 import Popup from "./components/Popup/Popup";
 import TextInput from "./components/TextInput/TextInput";
+import React, { useState } from "react";
+import { useAppDispatch, useAppSelector } from "./store/hooks";
 
 function App() {
-  console.log(useLocation());
+  const reduxDispatch = useAppDispatch();
+  const state = useAppSelector(state => state.AppStore);
+
+  const [popupIsActive, setActivePopup] = useState(false);
+
   return (
     <div className="App">
       <Header
@@ -18,23 +24,24 @@ function App() {
         rightBtn={
           <DefaultBtn
             iconName='plus'
-            iconSize={18} />}
+            iconSize={18}
+            handleClick={() => setActivePopup(true)} />}
       />
 
       <Popup
+        isActive={popupIsActive}
         title='Удалить список купить в магазине?'
+        closeFunc={() => setActivePopup(false)}
         children={
           <TextInput
             placeholder='Добавить'
-            placeholderIcon={{
-              size: 16,
-              icon: 'search',
-            }}
-            button={{
-              iconName: 'plus',
-              iconSize: 16,
-            }}
             handleChange={(e) => console.log(e.target.value)}
+            button={
+              <DefaultBtn
+                iconName='plus'
+                iconSize={16}
+                handleClick={(e) => console.log(e.target)} />
+            }
           />
         }
       />

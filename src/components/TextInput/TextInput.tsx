@@ -10,10 +10,8 @@ interface IInput {
     size: number,
     icon: string,
   };
-  button: {
-    iconName: string,
-    iconSize: number,
-  };
+  button: React.ReactNode;
+  buttonClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -25,24 +23,23 @@ const TextInput: FC<IInput> = ({
 }) => {
   return (
     <div className={styles.inputWrapper}>
-      {
-        placeholderIcon ?
-          <Icon
-            size={placeholderIcon.size}
-            icon={placeholderIcon.icon}
-            color='rgba(0, 0, 0, 0.25)' /> :
-          ''
-      }
-      <input
-        type="text"
-        className={styles.textInput}
-        onInput={handleChange}
-        placeholder={`${placeholder}...`} />
-      {
-        <DefaultBtn
-          iconName={button.iconName}
-          iconSize={button.iconSize} />
-      }
+      <span>
+        {
+          placeholderIcon ?
+            <Icon
+            className={styles.placeholderIcon}
+              size={placeholderIcon.size}
+              icon={placeholderIcon.icon}
+              color='rgba(0, 0, 0, 0.25)' /> :
+            ''
+        }
+        <input
+          type="text"
+          className={styles.textInput}
+          onInput={handleChange}
+          placeholder={`${placeholder}...`} />
+      </span>
+      {button}
     </div>
   )
 };

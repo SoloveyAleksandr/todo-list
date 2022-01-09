@@ -29,6 +29,16 @@ const myTodosList: ITodosList[] = [
         id: 'dsf4fs3',
         title: 'салат',
         isDone: false,
+      },
+      {
+        id: '345b43',
+        title: 'салат',
+        isDone: true,
+      },
+      {
+        id: 'b87654b',
+        title: 'салат',
+        isDone: false,
       }
     ]
   },
@@ -71,7 +81,9 @@ const AppStore = createSlice({
   },
 });
 
-export const { } = AppStore.actions;
+export const {
+  setActivePageName,
+} = AppStore.actions;
 
 const store = configureStore({
   reducer: {

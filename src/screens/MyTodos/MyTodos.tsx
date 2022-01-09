@@ -6,6 +6,7 @@ import Icon from "../../components/Icon/Icon";
 
 import styles from './MyTodos.module.css';
 import TextInput from "../../components/TextInput/TextInput";
+import { NavLink } from "react-router-dom";
 
 const MyTodos: FC = () => {
   const reduxDispatch = useAppDispatch();
@@ -17,18 +18,22 @@ const MyTodos: FC = () => {
         <ul className={styles.todosList}>
           {todosList.map(todos =>
             <li
-              key={todos.id}
-              className={styles.listItem}
-              onClick={() => console.log(todos.id)}>
-              <span>
-                <Icon
-                  icon='list'
-                  size={16}
-                  className={styles.itemIcon} />
-                {todos.title}</span>
-              <DefaultBtn
-                iconName='edit'
-                iconSize={16} />
+              key={todos.id}>
+              <NavLink
+                to={`/todo:${todos.id}`}
+                className={styles.itemLink}>
+                <div className={styles.listItem}>
+                  <span>
+                    <Icon
+                      icon='list'
+                      size={16}
+                      className={styles.itemIcon} />
+                    {todos.title}</span>
+                  <DefaultBtn
+                    iconName='edit'
+                    iconSize={16} />
+                </div>
+              </NavLink>
             </li>
           )}
         </ul>

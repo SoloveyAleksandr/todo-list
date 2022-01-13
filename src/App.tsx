@@ -16,17 +16,10 @@ function App() {
   const state = useAppSelector(state => state.AppStore);
 
   const [popupIsActive, setActivePopup] = useState(false);
+  const [inputValue, setInputValue] = useState('');
 
   return (
     <div className="App">
-      <Header
-        title='Мой список дел'
-        rightBtn={
-          <DefaultBtn
-            iconName='plus'
-            iconSize={18}
-            handleClick={() => setActivePopup(true)} />}
-      />
 
       <Popup
         isActive={popupIsActive}
@@ -34,8 +27,9 @@ function App() {
         closeFunc={() => setActivePopup(false)}
         children={
           <TextInput
+            value={inputValue}
             placeholder='Добавить'
-            handleChange={(e) => console.log(e.target.value)}
+            handleChange={(e) => setInputValue(e.target.value)}
             button={
               <DefaultBtn
                 iconName='plus'

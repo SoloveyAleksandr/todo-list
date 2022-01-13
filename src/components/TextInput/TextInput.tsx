@@ -5,6 +5,7 @@ import Icon from "../Icon/Icon";
 import styles from './TextInput.module.css';
 
 interface IInput {
+  value: string;
   placeholder: string;
   placeholderIcon?: {
     size: number,
@@ -16,6 +17,7 @@ interface IInput {
 };
 
 const TextInput: FC<IInput> = ({
+  value,
   placeholder,
   placeholderIcon,
   button,
@@ -27,7 +29,7 @@ const TextInput: FC<IInput> = ({
         {
           placeholderIcon ?
             <Icon
-            className={styles.placeholderIcon}
+              className={styles.placeholderIcon}
               size={placeholderIcon.size}
               icon={placeholderIcon.icon}
               color='rgba(0, 0, 0, 0.25)' /> :
@@ -35,6 +37,7 @@ const TextInput: FC<IInput> = ({
         }
         <input
           type="text"
+          value={value}
           className={styles.textInput}
           onInput={handleChange}
           placeholder={`${placeholder}...`} />

@@ -1,23 +1,21 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
-interface ITodosList {
+export interface ITodosList {
   id: string;
   title: string;
   todos: ITodo[];
 }
 
-interface ITodo {
+export interface ITodo {
   id: string,
   title: string,
   isDone: boolean,
 }
 
-interface IActivePage {
-  title: string;
-}
-
-const activePageTitle: IActivePage = {
-  title: 'Мой список дел',
+const currentTodos: ITodosList = {
+  id: '',
+  title: '',
+  todos: [],
 };
 
 const myTodosList: ITodosList[] = [
@@ -32,15 +30,15 @@ const myTodosList: ITodosList[] = [
       },
       {
         id: '345b43',
-        title: 'салат',
+        title: 'капуста',
         isDone: true,
       },
       {
         id: 'b87654b',
-        title: 'салат',
+        title: 'финики',
         isDone: false,
       }
-    ]
+    ],
   },
   {
     id: '32f34r',
@@ -70,19 +68,39 @@ const AppStore = createSlice({
   name: 'AppStore',
 
   initialState: {
-    activePageTitle,
+    currentTodos,
     myTodosList,
   },
 
   reducers: {
-    setActivePageName(state, action) {
-      state.activePageTitle = action.payload;
-    }
+    setCurrentTodos(state, action: { payload: ITodosList }) {
+      state.currentTodos = action.payload;
+    },
+    addNewTodosList(state, action: { payload: ITodosList }) {
+      state.myTodosList.push(action.payload);
+    },
+    setTodoIsDone(state, action) {
+      state.currentTodos.todos[action.payload].isDone = true;
+    },
+    saveCurrentState(state) {
+      state.myTodosList.map(todo => {
+        if (todo.id === state.currentTodos.id) {
+          todo.todos = state.currentTodos.todos;
+        }
+      })
+    },
+    deleteTodo(state, action) {
+      state.currentTodos.todos = state.currentTodos.todos.filter(todo => todo.id !== action.payload);
+    },
   },
 });
 
 export const {
-  setActivePageName,
+  setCurrentTodos,
+  addNewTodosList,
+  setTodoIsDone,
+  saveCurrentState,
+  deleteTodo,
 } = AppStore.actions;
 
 const store = configureStore({

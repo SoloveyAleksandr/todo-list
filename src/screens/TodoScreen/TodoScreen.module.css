@@ -38,3 +38,21 @@
 .itemLink {
   text-decoration: none;
 }
+
+.btnWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.cancelBtn {
+  transform: rotate(45deg);
+}
+
+.addInputWrapper {
+  position: fixed;
+  left: 0;
+  bottom: 15px;
+  width: 100%;
+  padding: 0 15px;
+}

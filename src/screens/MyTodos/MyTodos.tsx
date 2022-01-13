@@ -25,7 +25,12 @@ const MyTodos: FC = () => {
       id: id,
       title: addInputValue,
       todos: [],
-    }))
+    }));
+  }
+
+  function openAddPopup() {
+    setAddInputValue('');
+    setActivPopup(!popupIsActive);
   }
 
   return (
@@ -37,7 +42,7 @@ const MyTodos: FC = () => {
           <DefaultBtn
             iconName='plus'
             iconSize={16}
-            handleClick={() => setActivPopup(!popupIsActive)} />
+            handleClick={openAddPopup} />
         } />
 
       <Popup

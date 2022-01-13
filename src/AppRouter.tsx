@@ -12,7 +12,7 @@ const AppRouter: FC = () => {
         path='/myTodos'
         element={<MyTodos />} />
       {
-        currentTodos.todos.length > 0 ?
+        currentTodos.id !== '' ?
           <Route
             path={'/todo'}
             element={<TodoScreen />} /> :

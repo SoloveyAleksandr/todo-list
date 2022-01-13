@@ -92,6 +92,12 @@ const AppStore = createSlice({
     deleteTodo(state, action) {
       state.currentTodos.todos = state.currentTodos.todos.filter(todo => todo.id !== action.payload);
     },
+    deleteTodosList(state) {
+      state.myTodosList = state.myTodosList.filter(todos => todos.id !== state.currentTodos.id);
+    },
+    addTodo(state, action: { payload: ITodo }) {
+      state.currentTodos.todos.push(action.payload);
+    }
   },
 });
 
@@ -101,6 +107,8 @@ export const {
   setTodoIsDone,
   saveCurrentState,
   deleteTodo,
+  deleteTodosList,
+  addTodo,
 } = AppStore.actions;
 
 const store = configureStore({

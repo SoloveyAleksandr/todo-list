@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import Container from "../../components/Container/Container";
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import DefaultBtn from "../../components/DefaultBtn/DefaultBtn";
@@ -14,11 +14,17 @@ import { addNewTodosList, setCurrentTodos } from "../../store";
 
 const MyTodos: FC = () => {
   const reduxDispatch = useAppDispatch();
-  const todosList = useAppSelector(state => state.AppStore.myTodosList);
+  const state = useAppSelector(state => state.AppStore);
   const [popupIsActive, setActivPopup] = useState(false);
   const [addInputValue, setAddInputValue] = useState<string>('');
   const [searchInputValue, setSearchInputValue] = useState<string>('');
   const id: string = uuid().slice(0, 8);
+
+  const myTodosList = (count: string) => {
+    if (searchInputValue === '') {
+      return state.myTodosList;
+    } return state.myTodosList.filter(el => el.title.includes(count));
+  }
 
   function addTodos() {
     reduxDispatch(addNewTodosList({
@@ -66,7 +72,7 @@ const MyTodos: FC = () => {
 
       <Container>
         <ul className={styles.todosList}>
-          {todosList.map(todos =>
+          {myTodosList(searchInputValue).map(todos =>
             <li
               key={todos.id}
               onClick={() => reduxDispatch(setCurrentTodos({

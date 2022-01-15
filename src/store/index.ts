@@ -18,51 +18,7 @@ const currentTodos: ITodosList = {
   todos: [],
 };
 
-const myTodosList: ITodosList[] = [
-  {
-    id: '123fwe34',
-    title: 'Купить в магазине',
-    todos: [
-      {
-        id: 'dsf4fs3',
-        title: 'салат',
-        isDone: false,
-      },
-      {
-        id: '345b43',
-        title: 'капуста',
-        isDone: true,
-      },
-      {
-        id: 'b87654b',
-        title: 'финики',
-        isDone: false,
-      }
-    ],
-  },
-  {
-    id: '32f34r',
-    title: 'Прочесть',
-    todos: [
-      {
-        id: '423с4в',
-        title: 'Война и мир',
-        isDone: false,
-      }
-    ]
-  },
-  {
-    id: '325v345v',
-    title: 'Посмотреть',
-    todos: [
-      {
-        id: '3243457452',
-        title: 'Люди в черном',
-        isDone: false,
-      }
-    ]
-  }
-];
+const myTodosList: ITodosList[] = [];
 
 const AppStore = createSlice({
   name: 'AppStore',
@@ -79,7 +35,7 @@ const AppStore = createSlice({
     addNewTodosList(state, action: { payload: ITodosList }) {
       state.myTodosList.push(action.payload);
     },
-    setTodoIsDone(state, action) {
+    setTodoIsDone(state, action: { payload: number }) {
       state.currentTodos.todos[action.payload].isDone = true;
     },
     saveCurrentState(state) {
@@ -89,7 +45,7 @@ const AppStore = createSlice({
         }
       })
     },
-    deleteTodo(state, action) {
+    deleteTodo(state, action: { payload: string }) {
       state.currentTodos.todos = state.currentTodos.todos.filter(todo => todo.id !== action.payload);
     },
     deleteTodosList(state) {
